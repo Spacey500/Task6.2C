@@ -11,30 +11,32 @@ pipeline{
                 echo "Use Maven to build the code, compile, and package the code"
             }
         }
-        stage('Test'){
-            steps{
+        stage('Test') {
+            steps {
                 echo "Run Unit Tests using Jenkins"
-                echo "Run Intergrations tests using Jenkins"
+                echo "Run Integration tests using Jenkins"
             }
             post {
                 always {
-                    // Archive the build log as an artifact
-                    archiveArtifacts artifacts: 'build.log', onlyIfSuccessful: true
+                    // Save the build log to a file
+                    sh 'echo "${BUILD_LOG}" > build.log'
                 }
                 success {
-                    emailext body: 'Build was successful!',
+                    // Send an email with the build log as an attachment
+                    mail to: 'C04@gmail.com',
                         subject: 'Build Status Email',
-                        to: 'Chelsea.Dore04@gmail.com',
+                        body: 'Build was successful!',
                         attachmentsPattern: 'build.log'
                 }
                 failure {
-                    emailext body: 'Build failed!',
+                    // Send an email with the build log as an attachment
+                    mail to: 'C04@gmail.com',
                         subject: 'Build Status Email',
-                        to: 'Chelsea.Dore04@gmail.com',
+                        body: 'Build failed!',
                         attachmentsPattern: 'build.log'
                 }
-            }
-        }
+    }
+}
         stage('Code Analysis'){
             steps{
                 echo "Integrate a code analysis tool callef PMD"
