@@ -16,17 +16,22 @@ pipeline{
                 echo "Run Unit Tests using Jenkins"
                 echo "Run Intergrations tests using Jenkins"
             }
-            post{
-                success{
-                    mail to:"Chelsea.Dore04@gmail.com",
-                    subject: "Build Status Email",
-                    body: "Build was successful!",
-                    attachments: build.log
+            post {
+                always {
+                    // Archive the build log as an artifact
+                    archiveArtifacts artifacts: 'build.log', onlyIfSuccessful: true
                 }
-                 failure {
-                    mail to:"Chelsea.Dore04@gmail.com",
-                    subject: "Build Status Email",
-                    body: "Build failed!"
+                success {
+                    emailext body: 'Build was successful!',
+                        subject: 'Build Status Email',
+                        to: 'Chelsea.Dore04@gmail.com',
+                        attachmentsPattern: 'build.log'
+                }
+                failure {
+                    emailext body: 'Build failed!',
+                        subject: 'Build Status Email',
+                        to: 'Chelsea.Dore04@gmail.com',
+                        attachmentsPattern: 'build.log'
                 }
             }
         }
