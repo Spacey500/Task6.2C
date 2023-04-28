@@ -23,20 +23,20 @@ pipeline{
                 }
                 success {
                     // Send an email with the build log as an attachment
-                    mail to: 'C04@gmail.com',
+                    mail to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
                         body: 'Build was successful!',
-                        attachmentsPattern: 'build.log'
+                        attachments: [file: 'build.log']
                 }
                 failure {
                     // Send an email with the build log as an attachment
-                    mail to: 'C04@gmail.com',
+                    mail to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
                         body: 'Build failed!',
-                        attachmentsPattern: 'build.log'
+                        attachments: [file: 'build.log']
                 }
-    }
-}
+            }
+        }
         stage('Code Analysis'){
             steps{
                 echo "Integrate a code analysis tool callef PMD"
