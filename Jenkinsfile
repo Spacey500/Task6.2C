@@ -34,9 +34,10 @@ pipeline{
             }
         }
         stage('Intergration Tests'){
-            echo "run integration tests on staging environments"
-            echo "Make sure the application functions as a production-like environment"
-
+            steps{
+                echo "run integration tests on staging environments"
+                echo "Make sure the application functions as a production-like environment"
+            }
         }
         stage('Deploy to Production'){
             steps{
