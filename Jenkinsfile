@@ -22,11 +22,6 @@ pipeline{
                     subject: "Build Status Email",
                     body: "Build was successful!"
                 }
-                fail{
-                    mail to:"Chelsea.Dore04@gmail.com"
-                    subject: "Build Status Email",
-                    body: "Build failed!"
-                }
             }
         }
         stage('Code Analysis'){
