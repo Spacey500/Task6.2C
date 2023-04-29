@@ -20,7 +20,8 @@ pipeline{
                 success{
                     mail to:"Chelsea.Dore04@gmail.com",
                     subject: "Build Status Email",
-                    body: "Build was successful!"
+                    body: "Build was successful!",
+                    attachments: [[$class: 'FilePath', path: "${env.WORKSPACE}/build.log", description: 'Build Log']]
                 }
                  failure {
                     mail to:"Chelsea.Dore04@gmail.com",
