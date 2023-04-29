@@ -19,21 +19,21 @@ pipeline{
             post {
                 always {
                     // Save the build log to a file
-                    sh 'echo "${BUILD_LOG}" > build.log'
+                   
                 }
                 success {
                     // Send an email with the build log as an attachment
                     emailext to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
                         body: 'Build was successful!',
-                        attachmentsPattern: 'build.log'
+                        
                 }
                 failure {
                     // Send an email with the build log as an attachment
                     emailext to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
                         body: 'Build failed!',
-                        attachmentsPattern: 'build.log'
+                        
                 }
             }
         }
