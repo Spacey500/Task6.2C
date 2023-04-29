@@ -17,10 +17,6 @@ pipeline{
                 echo "Run Integration tests using Jenkins"
             }
             post {
-                always {
-                    // Save the build log to a file
-                   
-                }
                 success {
                     // Send an email with the build log as an attachment
                     emailext to: 'Chelsea.Dore04@gmail.com',
