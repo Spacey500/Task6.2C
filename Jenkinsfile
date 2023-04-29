@@ -11,28 +11,24 @@ pipeline{
                 echo "Use Maven to build the code, compile, and package the code"
             }
         }
-        stage('Test') {
-            steps {
+        stage('Test'){
+            steps{
                 echo "Run Unit Tests using Jenkins"
-                echo "Run Integration tests using Jenkins"
+                echo "Run Intergrations tests using Jenkins"
             }
-            post {
-                success {
-                    // Send an email with the build log as an attachment
-                    emailext to: 'Chelsea.Dore04@gmail.com',
-                        subject: 'Build Status Email',
-                        body: 'Build was successful!'
-                        
+            post{
+                success{
+                    mail to:"Chelsea.Dore04@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build was successful!"
                 }
-                failure {
-                    // Send an email with the build log as an attachment
-                    emailext to: 'Chelsea.Dore04@gmail.com',
-                        subject: 'Build Status Email',
-                        body: 'Build failed!'
-                        
+                 failure {
+                    mail to:"Chelsea.Dore04@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build failed!"
                 }
             }
-        }
+        } 
         stage('Code Analysis'){
             steps{
                 echo "Integrate a code analysis tool callef PMD"
