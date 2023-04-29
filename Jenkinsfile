@@ -25,14 +25,14 @@ pipeline{
                     // Send an email with the build log as an attachment
                     emailext to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
-                        body: 'Build was successful!',
+                        body: 'Build was successful!'
                         
                 }
                 failure {
                     // Send an email with the build log as an attachment
                     emailext to: 'Chelsea.Dore04@gmail.com',
                         subject: 'Build Status Email',
-                        body: 'Build failed!',
+                        body: 'Build failed!'
                         
                 }
             }
