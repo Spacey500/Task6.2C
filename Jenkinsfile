@@ -24,15 +24,15 @@ pipeline{
         success {
             // Send an email with the build log as an attachment
             emailext to: 'Chelsea.Dore04@gmail.com',
-                subject: 'Build Status Email',
-                body: 'Build was successful!',
+                subject: 'Test Status Email',
+                body: 'Stage was successful!',
                 attachmentsPattern: 'build.log'
         }
         failure {
             // Send an email with the build log as an attachment
             emailext to: 'Chelsea.Dore04@gmail.com',
-                subject: 'Build Status Email',
-                body: 'Build failed!',
+                subject: 'Test Status Email',
+                body: 'Stage failed!',
                 attachmentsPattern: 'build.log'
         }
     }
@@ -48,6 +48,26 @@ pipeline{
             steps{
                 echo "Perfom a security scan using NeuVector"
             }
+            post {
+        always {
+            // Save the build log to a file
+            sh 'echo "${BUILD_LOG}" > build.log'
+        }
+        success {
+            // Send an email with the build log as an attachment
+            emailext to: 'Chelsea.Dore04@gmail.com',
+                subject: 'Security Scan Status Email',
+                body: 'Stage was successful!',
+                attachmentsPattern: 'build.log'
+        }
+        failure {
+            // Send an email with the build log as an attachment
+            emailext to: 'Chelsea.Dore04@gmail.com',
+                subject: 'Security Scan Status Email',
+                body: 'Stage failed!',
+                attachmentsPattern: 'build.log'
+        }
+         }
         }
         stage('Deploy to Staging'){
             steps{
@@ -59,6 +79,26 @@ pipeline{
                 echo "run integration tests on staging environments"
                 echo "Make sure the application functions as a production-like environment"
             }
+            post {
+        always {
+            // Save the build log to a file
+            sh 'echo "${BUILD_LOG}" > build.log'
+        }
+        success {
+            // Send an email with the build log as an attachment
+            emailext to: 'Chelsea.Dore04@gmail.com',
+                subject: 'Integration Test on Staging Status Email',
+                body: 'Stage was successful!',
+                attachmentsPattern: 'build.log'
+        }
+        failure {
+            // Send an email with the build log as an attachment
+            emailext to: 'Chelsea.Dore04@gmail.com',
+                subject: 'Integration Test on Staging Status Email',
+                body: 'Stage failed!',
+                attachmentsPattern: 'build.log'
+        }
+    }
         }
         stage('Deploy to Production'){
             steps{
