@@ -1,10 +1,5 @@
 pipeline{
     agent any
-    environment{
-        DIRECTORY_PATH="/Desktop/School Year2/223/5.1"
-        TESTING_ENVIRONMENT="Testing Environment1"
-        PRODUCTION_ENVIRONMENT= "Chelsea" 
-    } 
     stages{
         stage('Build'){
             steps{
